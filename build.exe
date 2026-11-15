@@ -1,0 +1,10 @@
+@echo off
+REM Compiles main.cpp into engine.js + engine.wasm
+call C:\emsdk\emsdk-main\emsdk_env.bat
+em++ main.cpp -O2 -o engine.js ^
+  -s MODULARIZE=1 -s EXPORT_NAME=createEngine ^
+  -s EXPORTED_RUNTIME_METHODS=ccall,cwrap ^
+  -s EXPORTED_FUNCTIONS="['_load_data','_export_data','_search_events','_get_event','_add_event','_update_event','_delete_event','_malloc','_free']"
+echo.
+echo Done. You should now see engine.js and engine.wasm in this folder.
+pause
